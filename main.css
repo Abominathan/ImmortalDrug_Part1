@@ -1,0 +1,77 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    
+    height: 100%;
+}
+body {
+        font-size: 150%;
+        min-height:100%;
+        background-color: #a1caf1;
+        display: flex;
+        justify-content: center;
+}
+
+#mainbody{
+    width:750px;
+    position:relative;
+    top:0;
+    bottom:0;
+    /*left:0;
+    right:0;*/
+    overflow:hidden;
+    
+    
+    padding-top: 100px;
+    padding-left: 100px;
+    padding-right: 100px;
+    /*height:100%-1px;*/
+    background-color: #eeeeee;
+    
+}
+
+input{
+    position: relative;
+    top: 5px;
+}
+
+canvas{
+    background: white;
+    margin: 0 auto;
+}
+
+p {
+    font-size: 24px;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+h1 {
+  color: Red;
+  text-align: center;
+}
+
+h3 {
+  text-align: center;
+}
+
+.changeablevalue {
+  font-weight: bold;
+  color: Red;
+}
+
+.calcValue{
+  font-weight: bold;
+  color: #0000FF;
+}
+
+.singleDead{
+    text-align: center;
+}
+
+.centerslider{
+    text-align: center;
+}

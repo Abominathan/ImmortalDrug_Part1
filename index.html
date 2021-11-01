@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TestingChart.js</title>
+    <link rel="stylesheet" href="main.css">
+    
+</head>
+<body>
+    <script type='text/javascript' src='knockout-3.5.1.js'></script>
+    <div id="mainbody">
+        <h1> Immortal Drug: Part 1 </h1>
+        
+        <h2> What would happen if your body reverted back to a <span class= 'changeablevalue' data-bind='text: ageValue'></span> year old?</h2>
+        
+        <p>With how things are now, someday you will die. Even with a magic medicine that will stop you from aging, you will still die. It's just how this model works. You might be asking, "when will I die though?" and I have just the thing for you. First I will need you to tell me about yourself, so I can statistically predict when you will die. (I'm not collecting your information. I don't even know how to do that and I don't want it.)</p>
+        <br>
+        <div class="label"> First, "Are you a boy or girl?"-Professor Oak     <label><input type="radio" value="Boy" data-bind="checked: Gender" />Boy</label> <label><input type="radio" value="Girl" data-bind="checked: Gender" />Girl</label> </div>
+
+        <br>
+        <p> Next I will need your current age. You can change it with this slider </p>
+        <p>Your current age is <input type="range" min="0." max="120." step="1"  data-bind="value: rangeValue, valueUpdate: 'input'"/> <span class= 'changeablevalue' data-bind='text: rangeValue'></span> (red values can be directly changed)</p>
+        
+        <br>
+        
+        <p> With those two pieces I can predict when you will die (at least statsictally). Just bush the button below to age 1 year and see when you die! </p>
+        
+        <p class='singleDead' style="font-size:100px"><span id="DeadOrAlive"></p>
+        
+        <p class='singleDead'>  Age: <span class='changeablevalue' data-bind='text: numberOfClicks'>;</span> years old</p>
+        
+        <div class='singleDead'>
+            <button class='singleDead' data-bind='click: registerClick, disable: isdead'>Age 1 year</button>
+            <button class='singleDead' data-bind='click: resetClicks'>Reset</button>
+        </div>
+        
+        <p> Well okay, that does not predict when "you" will die. If you reset it and try again you will probably die at a different age(with no effect on your actual mortality). Instead you have some probability of dying for each age and this just rolls the dice each time you press the button to age. That doesn't really answer the question though, when will you die. Welllll I can't answer that question, I can only tell what the probability of you dying at a given age is. Just keep clicking the button and record the age you die. If you do that a bunch of times, you will start to get the probability of when you will die. Or move onto the next part to save yourself some clicking</p> 
+            
+        <br>    
+
+        <p> To save your poor mouse a lot of clicking, let's do 100 people at a time. Now you can easily see that these emoji are dying at different ages. This gives you a better outlook on when you will die, as in this simulation there is a <span class='calcValue' data-bind='text: numberAlive'>&nbsp;</span>% chance you live to be <span class='changeablevalue' data-bind='text: ManynumberOfClicks'>&nbsp;</span>. (blue values are calculated and can only be indirectly changed)  </p> 
+
+        <br>
+
+        
+        <p class='singleDead' style="white-space: pre-line"><span id="ManyDeadOrAlive"></p>
+        
+        <div class='singleDead'> Age: <span class='changeablevalue' data-bind='text: ManynumberOfClicks'>&nbsp;</span> years old Alive: <span class='calcValue' data-bind='text: numberAlive'>&nbsp;</span> Dead: <span class='calcValue' data-bind='text: numberDead'>&nbsp;</span> </div>
+        <div class='singleDead'>
+            <button data-bind='click: ManyregisterClick, disable: Manyisdead'>Age 1 year</button>
+            <button data-bind='click: ManyresetClicks'>Reset Everyone</button>
+        </div>
+        
+        <br>
+        <p>However, this still is not enough people to get a good statsical answer. We would have to run this many times. You could go run it a bunch of times and record the answers, but I don't think you mouse needs that kind of abuse today. Luckily for your mouse, I did the math for this. Below I show the probability that you live to a certain age. Or another way to view this is that it is the percent of people who are currently your age and gender that make it to the age on the x-axis. Also I'll leave the slider to adjust your current age below. All of these things are interactable, so moving the slider will change your age which will then cause the  the plots below and the earlier emoji death predictors to change.</p> 
+        
+        <p class='centerslider'> Current Age Slider <input type="range" min="0." max="120." step="1"  data-bind="value: rangeValue, valueUpdate: 'input'"/> <span class= 'changeablevalue' data-bind='text: rangeValue'></span> years old</p> </p>
+        
+        <canvas id="myChart" width="700" height="400"></canvas>
+            
+        <br>
+        
+        <p> To expose the magic performed here and to hopefully make what I'm going to do next clearer, I am going to disclose what I actually did here. I cannot see into the future(would be a lot richer if I could), so I cannot actually say when you will die. Instead I took the death probability from the <a href="https://www.ssa.gov/oact/STATS/table4c6.html">Actuarial Life Table</a>. The death probability is the probability that you die within the next year. By going through year by year, I can then give a probability that you would survive that long. For the emoiji simulatiors, I generate a random number between 0 and 1 and see if it is above the death probability. If it is above it, you survive, else you die. </p>
+        
+        <br>
+        <h3> The Magic Medicine</h3>
+        <br>
+        
+        <p> Now to get to the main question of this thing, what if there was some magic medicine that would turn you back to <span class= 'changeablevalue' data-bind='text: ageValue'></span> year old? Well to be precise the magic medicine would give you the same chance of dying that someone has at <span class= 'changeablevalue' data-bind='text: ageValue'></span> year old. The plot below gas the current probability you die in a given year and probability you die in a given year if your probability of death was fixed at some age. Basically once you hit that age, your dying probability stays the same. (After <span class= 'changeablevalue' data-bind='text: ageValue'></span> years old your dying probability would stay the same and be at <span class='calcValue' data-bind="text: DyingProb"></span>%) </p> 
+       
+        <br>
+        
+        <p class='centerslider'>Stop Aging Age <input type="range" min="0." max="120." step="1" oninput="this.nextElementSibling.value = this.value" data-bind="value: ageValue, valueUpdate: 'input'"/> <span class='changeablevalue' data-bind='text: ageValue'></span></p>
+        
+        <canvas id="DieProbability" width="700" height="400"></canvas>
+        
+        <p> I do want to point of somethings with this already. Your probability of dying is lowest at 10 years old and newborns actually have a relatively high death probability, the same as a 56 year old for females or a 52 year old for males. So if you've made it past being a newborn, congratulations. Also, I made an addition to the Actuarial Life Table data to so that there is a 100% chance you die at 120, which makes it easier to model. This means you cannot make it to 121 years old without the magic medicine. (It doesn't change much, because so few people make it to that age already) </p>
+        
+        <br>
+        
+        <p>Okay, so let's look at the chance of being alive plot I showed before and see how it would change.(We will only plot to 200 years old) I give you the current age and stop aging age sliders below.</p>
+        
+        <br>
+        <p class='centerslider'> Your Current Age <input type="range" min="0." max="120." step="1"  data-bind="value: rangeValue, valueUpdate: 'input'"/> <span class= 'changeablevalue' data-bind='text: rangeValue'></span></p>
+        <p class='centerslider'> Stop Aging Age <input type="range" min="0." max="120." step="1" oninput="this.nextElementSibling.value = this.value" data-bind="value: ageValue, valueUpdate: 'input'"/> <span class= 'changeablevalue' data-bind='text: ageValue'></span></p>
+        <canvas id="AliveProb" width="700" height="400"></canvas>
+        
+        <br>
+        
+        <p> As you can see, your probability of being alive is always decreasing. This unfortunalely means that at some point, you will die in this model. But how long should you expect to live(your life expectancy). That's what is plotted below, life expectancy versus age.</p>
+        
+        
+        <br>
+        <p class='centerslider'> Your Current Age <input type="range" min="0." max="120." step="1"  data-bind="value: rangeValue, valueUpdate: 'input'"/> <span class= 'changeablevalue' data-bind='text: rangeValue'></span></p>
+        <p class='centerslider'> Stop Aging Age <input type="range" min="0." max="120." step="1" oninput="this.nextElementSibling.value = this.value" data-bind="value: ageValue, valueUpdate: 'input'"/> <span class= 'changeablevalue' data-bind='text: ageValue'></span></p>
+        <canvas id="LifeExp" width="700" height="400"></canvas>
+        
+        <p> At <span class= 'changeablevalue' data-bind='text: rangeValue'></span> years old, you gain <span class='calcValue' data-bind="text: GainedYears()"></span> years of life. Well to be more accurate, <span class= 'changeablevalue' data-bind='text: rangeValue'></span> year olds on average would gain <span class='calcValue' data-bind="text: GainedYears()"></span> years of life. You may notice that the magic medicine life expectancy goes flat after the stop aging age. This is from your death probability not changing, so you always have the same chance of suriving another X years. You still have some probability of dying during those years, so that the number of people keeps decreasing. In fact, the next thing we will look at is what happens to the population pyramid and population after this magic medicine is introduced.</p> 
+        
+        <br>
+        
+        <p> What is shown below is the perecnt of the population in different age groups a long time after the magic medicine has been introduced. The "long time" here is long enough that people under the stop aging age would now be the oldest alive generation. One more thing to note is that the age range for the bars changes, so just be aware of that. Oh! Also I'm assuming that the same number of poeple are born each year. </p>
+        
+        <br>
+        <p class='centerslider'> Stop Aging Age <input type="range" min="0." max="120." step="1" oninput="this.nextElementSibling.value = this.value" data-bind="value: ageValue, valueUpdate: 'input'"/> <span class= 'changeablevalue' data-bind='text: ageValue'></span></p>        
+        <canvas id="PopPyramid" width="700" height="400"></canvas>
+        <br>
+        <p> If you already know about population pyramids, you might notice that as the stop aging age gets lower the population pyramid starts to look like an expanding population pyramid, which are usually seen in devloping countries. These pyramids are often from high birth rates and high death rates, so they have a lot of young people and few old people. What happens in the magic medicine case is that the people are instead living much longer, so there are a lot more "young" people dying than old people(like in the expaning population case), but a "young" person might be older than the oldest person alive today. It looks the same because most people are still dying before they reach old age, but old age after the magic medicine is on a different scale. </p>
+        
+        <br>
+        <p> Okay, so we looked at the population pyramid, but how would the world's population change with this? Would we see another population explosion like we saw in the last few centriues. I will use the same assumption as the population pyramid, that there are the same number of births each year (~140 million, the same number of births currently happening every year). We will also only look 250 years from the introduction of the magic medicine (I also assume that everyone gets access to the magic medicine, becuase it simplifies the model and would happen in a better world). </p>
+        
+        <br>
+        
+        <p class='centerslider'> Stop Aging Age <input type="range" min="0." max="120." step="1" oninput="this.nextElementSibling.value = this.value" data-bind="value: ageValue, valueUpdate: 'input'"/> <span  class= 'changeablevalue' data-bind='text: ageValue'></span></p>
+        <canvas id="PopOverTime" width="700" height="400"></canvas>
+        
+        <br>
+        <p> We do not see a population explosion. For higher stop aging ages, you can see that the population plateaus and becomes constant. For lower stop aging ages, the population grows linearly, but it would also eventrually plateu. The reason for this is that eventually the number of people dying and the number of people being born equals out. As an example, ff there is only a one in a million chance someone dies, the population would plateu when it reach 1 million times the birth rate. The recent population explosion occured from people making more people. If a couple has more than 2 children (and assuming those children don't die before having children), the population will exponentially increase. With the magic medicine, people are just living longer, not making more people.</p>
+        <!-- <button data-bind="click: replot">Replot</button> -->
+        
+        <h3> Conclusion </h3>
+        
+        <p> Well those were some interesting results to me. I hope it was as intersting to play with these things as it was for me. The thing that most suprised me is how much things changed even if the stop aging age was pretty high. At lower stop aging ages, you could be old enough that someone would have seen all of recorded human history if they were that old today. I do want to end on one last question that might seem pretty important: are these models right? No, this model is almost defintly wrong. Even assuming the the current actuarial life table stay constant in our current life time is a bold assumption (read bold assumption as a bad assumption). But these could still provide some intersting insight and be useful for an idea about the future. Even wrong, it gives an interesting look at what could be and what change that could have.</p>      
+
+        <br>
+        
+        <p>  If you want to learn more about life extension I would suggest looking into  <a href="https://en.wikipedia.org/wiki/Regenerative_medicine">Regenerative medicine</a>  and <a href="https://en.wikipedia.org/wiki/Life_extension">Life extension</a>. I also liked the book Ending Aging, which I thought did a good discussion of the current work being done on this.</p>    
+
+        <br>
+        
+        <p> If you made it to the end, thanks for reading. As a little bonus, on my browser(firefox), if you hold you mouse over the range slider and scroll your mouse wheel, you can change the value by 1. </p>
+        
+    
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js" integrity="sha512-Wt1bJGtlnMtGP0dqNFH1xlkLBNpEodaiQ8ZN5JLA5wpc1sUlk/O5uuOMNgvzddzkpvZ9GLyYNa8w2s7rqiTk5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script> -->
+    <script src="script.js"></script>
+
+
+
+</body>
+</html>

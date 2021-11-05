@@ -29,7 +29,7 @@ const MaleDeathProb = [6.08100e-03,4.25000e-04,2.60000e-04,1.94000e-04,1.54000e-
                   8.54070e-02,9.50100e-02,1.05770e-01,1.17771e-01,1.31063e-01,1.45666e-01,1.61582e-01,1.78797e-01,1.97287e-01,2.17013e-01,2.37930e-01,2.58655e-01,
                   2.78786e-01,2.97897e-01,3.15556e-01,3.31333e-01,3.47900e-01,3.65295e-01,3.83560e-01,4.02738e-01,4.22875e-01,4.44018e-01,4.66219e-01,4.89530e-01,
                   5.14007e-01,5.39707e-01,5.66692e-01,5.95027e-01,6.24778e-01,6.56017e-01,6.88818e-01,7.23259e-01,7.59422e-01,7.97393e-01,8.37263e-01,8.79126e-01,1.0];
-                  
+
 const FemaleDeathProb = [5.04600e-03,3.49000e-04,2.12000e-04,1.66000e-04,1.37000e-04,1.22000e-04,1.11000e-04,1.03000e-04,9.80000e-05,9.50000e-05,9.60000e-05,1.02000e-04,
                     1.16000e-04,1.39000e-04,1.70000e-04,2.04000e-04,2.40000e-04,2.78000e-04,3.19000e-04,3.60000e-04,4.05000e-04,4.51000e-04,4.91000e-04,5.23000e-04,
                     5.50000e-04,5.75000e-04,6.05000e-04,6.42000e-04,6.91000e-04,7.49000e-04,8.11000e-04,8.72000e-04,9.33000e-04,9.90000e-04,1.04600e-03,1.10700e-03,
@@ -40,7 +40,7 @@ const FemaleDeathProb = [5.04600e-03,3.49000e-04,2.12000e-04,1.66000e-04,1.37000
                     6.48290e-02,7.26900e-02,8.15780e-02,9.15870e-02,1.02774e-01,1.15160e-01,1.28749e-01,1.43532e-01,1.59491e-01,1.76600e-01,1.94825e-01,2.13248e-01,
                     2.31570e-01,2.49466e-01,2.66589e-01,2.82585e-01,2.99540e-01,3.17512e-01,3.36563e-01,3.56756e-01,3.78162e-01,4.00852e-01,4.24903e-01,4.50397e-01,
                     4.77421e-01,5.06066e-01,5.36430e-01,5.68616e-01,6.02733e-01,6.38896e-01,6.77230e-01,7.17864e-01,7.59422e-01,7.97393e-01,8.37263e-01,8.79126e-01,1.0];
-   
+
 DeathProb = MaleDeathProb;
 
 
@@ -48,9 +48,9 @@ const years = [...Array(122).keys()];
 
 curr_LifeExp= [];
 
-for (let i = 0; i < 122; i ++) { 
+for (let i = 0; i < 122; i ++) {
     curr_LifeExp.push(computeLifeExp(121,DeathProb[i],i));
-};   
+};
 
 
 
@@ -59,7 +59,7 @@ var myChart = new Chart(ctx, {
     type: "line",
 
     data: {
-      
+
     labels: [],
     datasets: [
       {
@@ -69,7 +69,7 @@ var myChart = new Chart(ctx, {
         borderColor: "rgba(255, 99, 132, 1)",
         borderWidth: 1,
         fill: false,
-        lineTension: 0 
+        lineTension: 0
       }
     ]
     },
@@ -81,7 +81,7 @@ var myChart = new Chart(ctx, {
             //},
 
         },
-        
+
         scales: {
             x: {display: true,
                 title:{
@@ -108,15 +108,15 @@ function data0(datain){
     newdataset=[];
     chart_labels=[]
     CurrentDeathProp=1
-    for (let i = datain; i < 121; i ++) { 
+    for (let i = datain; i < 121; i ++) {
         chart_labels.push(i);
-        
+
         newdataset.push(CurrentDeathProp);
         CurrentDeathProp*=1-DeathProb[i]
     }
     chart_labels.push(121);
     newdataset.push(CurrentDeathProp);
-    
+
     data.datasets[0].data = newdataset;
     data.labels = chart_labels;
     myChart.update('none');
@@ -128,7 +128,7 @@ var myChart2 = new Chart(ctx2, {
     type: "line",
 
     data: {
-      
+
     labels: years,
     datasets: [
       {
@@ -138,7 +138,7 @@ var myChart2 = new Chart(ctx2, {
         borderColor: "rgba(255, 99, 132, 1)",
         borderWidth: 1,
         fill: false,
-        lineTension: 0 
+        lineTension: 0
       },
       {
         label: "Current Death Probabilty",
@@ -147,7 +147,7 @@ var myChart2 = new Chart(ctx2, {
         borderColor: "rgba(4, 124, 244, , 1)",
         borderWidth: 1,
         fill: false,
-        lineTension: 0 
+        lineTension: 0
       }
     ]
     },
@@ -159,7 +159,7 @@ var myChart2 = new Chart(ctx2, {
             //},
 
         },
-        
+
         scales: {
             x: {display: true,
                 title:{
@@ -190,7 +190,7 @@ function DieProp(stopage){
         }
         else{
             newdataset.push(DeathProb[stopage]);
-        } 
+        }
     }
     data.datasets[0].data = newdataset;
     myChart2.update('none');
@@ -202,7 +202,7 @@ var myChart3 = new Chart(ctx3, {
     type: "line",
 
     data: {
-      
+
     labels: [],
     datasets: [
       {
@@ -212,7 +212,7 @@ var myChart3 = new Chart(ctx3, {
         borderColor: "rgba(255, 99, 132, 1)",
         borderWidth: 1,
         fill: false,
-        lineTension: 0 
+        lineTension: 0
       },
       {
         label: "Current Alive Probability",
@@ -221,7 +221,7 @@ var myChart3 = new Chart(ctx3, {
         borderColor: "rgba(4, 124, 244, , 1)",
         borderWidth: 1,
         fill: false,
-        lineTension: 0 
+        lineTension: 0
       }
     ]
     },
@@ -232,7 +232,7 @@ var myChart3 = new Chart(ctx3, {
             //    text: "Site Traffic"},
 
         },
-        
+
         scales: {
             x: {display: true,
                 title:{
@@ -243,7 +243,7 @@ var myChart3 = new Chart(ctx3, {
             y: {display: true,
                 title:{
                     display:true,
-                    text: 'Probabilty you are dead()'
+                    text: 'Probabilty you are alive()'
                 }
             }
         },
@@ -261,7 +261,7 @@ function aliveProb(datain,stopage){
     CurrentDeathProp=1
     magicmediceDeathProp=1
 
-    for (let i = datain; i < 200; i ++) { 
+    for (let i = datain; i < 200; i ++) {
         chart_labels.push(i);
         if (i < stopage){
 
@@ -274,7 +274,7 @@ function aliveProb(datain,stopage){
             magicmediceDeathProp*=1-DeathProb[stopage];
 
         }
-        
+
         if (i>121){
             newdataset.push(CurrentDeathProp);
             CurrentDeathProp*=0
@@ -287,12 +287,12 @@ function aliveProb(datain,stopage){
     //chart_labels.push(121);
     //newdataset.push(CurrentDeathProp);
     //magicdataset.push(magicmediceDeathProp);
-    
+
     data.datasets[0].data = magicdataset;
     data.datasets[1].data = newdataset;
     data.labels = chart_labels;
     myChart3.update('none');
-    
+
 
 }
 
@@ -304,7 +304,7 @@ var myChart4 = new Chart(ctx4, {
     type: "line",
 
     data: {
-      
+
     labels: [],
     datasets: [
       {
@@ -314,7 +314,7 @@ var myChart4 = new Chart(ctx4, {
         borderColor: "rgba(255, 99, 132, 1)",
         borderWidth: 1,
         fill: false,
-        lineTension: 0 
+        lineTension: 0
       },
       {
         label: "Current Life Expectancy",
@@ -323,7 +323,7 @@ var myChart4 = new Chart(ctx4, {
         borderColor: "rgba(4, 124, 244, , 1)",
         borderWidth: 1,
         fill: false,
-        lineTension: 0 
+        lineTension: 0
       }
     ]
     },
@@ -334,7 +334,7 @@ var myChart4 = new Chart(ctx4, {
             //    text: "Site Traffic"},
 
         },
-        
+
         scales: {
             x: {display: true,
                 title:{
@@ -361,7 +361,7 @@ function computeLifeExp(stopage,stopdeath,age){
     currentage=age
     if (currentage<stopage)
     {
-        for (let i = currentage; i < stopage; i++) { 
+        for (let i = currentage; i < stopage; i++) {
             dead=DeathProb[i]*pop
             pop*=1-DeathProb[i]
             life_exp+=dead*(i-currentage+0.5)
@@ -390,14 +390,14 @@ function LifeExpCalc(stopage){
 
     for (let age=0; age<121;age++){
         chart_labels.push(age);
-        
+
         newdataset.push(computeLifeExp(stopage,stopdeath,age))
     }
-    
+
     data.datasets[0].data = newdataset;
     data.labels = chart_labels;
     myChart4.update('none');
-    
+
 }
 
 var myChart5 = new Chart(ctx5, {
@@ -405,7 +405,7 @@ var myChart5 = new Chart(ctx5, {
     type: "line",
 
     data: {
-      
+
     labels: [],
     datasets: [
       {
@@ -415,7 +415,7 @@ var myChart5 = new Chart(ctx5, {
         borderColor: "black",
         borderWidth: 1,
         fill: false,
-        lineTension: 0 
+        lineTension: 0
       },
       {
         label: "Male Magic Medicine Population",
@@ -424,7 +424,7 @@ var myChart5 = new Chart(ctx5, {
         borderColor: "red",
         borderWidth: 1,
         fill: false,
-        lineTension: 0 
+        lineTension: 0
       },
       {
         label: "Femal Magic Medicine Population",
@@ -433,7 +433,7 @@ var myChart5 = new Chart(ctx5, {
         borderColor: "blue",
         borderWidth: 1,
         fill: false,
-        lineTension: 0 
+        lineTension: 0
       },
     ]
     },
@@ -459,7 +459,7 @@ var myChart5 = new Chart(ctx5, {
 });
 
 function sum(array){
-    
+
     var count = 0;
     for(var i = 0; i < array.length; i++)
     {
@@ -471,24 +471,24 @@ function sum(array){
 function CalculatePop(stopage){
 
     var data = myChart5.config.data;
-    
+
     yearsafter=[]
     TotalWpop=[]
     TotalMpop=[]
     TotalPop=[]
-    
+
     StopWDeath=1-FemaleDeathProb[stopage]
     StopMDeath=1-MaleDeathProb[stopage]
 
     wpop=[1];
     mpop=[1];
-    
+
     tempMpop=1;
     tempWpop=1;
     for (let i =0; i < MaleDeathProb.length; i++){
         tempMpop*=(1-MaleDeathProb[i])
         mpop.push(tempMpop)
-        
+
         tempWpop*=(1-FemaleDeathProb[i])
         wpop.push(tempWpop)
 
@@ -497,13 +497,13 @@ function CalculatePop(stopage){
     TotalWpop.push(sum(wpop)*0.0441528952)
     TotalMpop.push(sum(mpop)*0.0441528952)
     TotalPop.push(TotalWpop[0]+TotalMpop[0])
-    yearsafter.push(0) 
-    
-     
-    for (let years =0; years < 250; years++){ 
+    yearsafter.push(0)
+
+
+    for (let years =0; years < 250; years++){
         oldmpop=mpop;
         oldwpop=wpop;
-        for (let i =wpop.length-2; i!=0; i--){ 
+        for (let i =wpop.length-2; i!=0; i--){
             if (i>stopage){
                 mpop[i]=(mpop[i-1]*StopMDeath);
 
@@ -511,38 +511,38 @@ function CalculatePop(stopage){
             }
             else{
                 mpop[i]=(mpop[i-1]*(1-MaleDeathProb[i-1]));
-                
+
                 wpop[i]=(wpop[i-1]*(1-FemaleDeathProb[i-1]));
             }
         }
-        
+
         mpop.push(mpop[mpop.length-1]*StopMDeath);
-        
+
         wpop.push(wpop[wpop.length-1]*StopWDeath);
-        
+
         TotalWpop.push(sum(wpop)*0.0441528952)
         TotalMpop.push(sum(mpop)*0.0441528952)
         TotalPop.push(TotalWpop[years+1]+TotalMpop[years+1])
         yearsafter.push(years+1)
         //console.log(wpop);
     }
-    
-    
-    
+
+
+
     data.datasets[0].data = TotalPop;
     data.datasets[1].data = TotalMpop;
     data.datasets[2].data = TotalWpop;
-    
+
     data.labels = yearsafter;
     myChart5.update('none');
-    
+
 }
 
 
 var myChart6 = new Chart(ctx6, {
     type: "bar",
-    
-    
+
+
     data: {
       labels: [],
       datasets: [{
@@ -563,9 +563,9 @@ var myChart6 = new Chart(ctx6, {
         borderColor: "blue",
         borderWidth: 0
       }]
-      
+
     },
-    
+
     options: {
         plugins: {
             tooltip: {
@@ -576,18 +576,18 @@ var myChart6 = new Chart(ctx6, {
                 }
             }
         },
-            
+
 
         indexAxis: 'y',
         scales: {
             y: {
-                
+
                 stacked: true,
                 ticks: {
                         beginAtZero: true,
                       },
                 position: "left",
-              
+
             },
             x: {
 
@@ -599,9 +599,9 @@ var myChart6 = new Chart(ctx6, {
                 },
                 stacked: false
             }
-            
+
         },
-        
+
   }
 });
 
@@ -611,10 +611,10 @@ function CreatePopPyramid(stopage){
     //data.datasets[0].data = datain;
     Mendataset=[];
     Womendataset=[];
-    
+
     FinalMendataset=[];
     FinalWomendataset=[];
-    
+
     chart_labels=[];
     Mstopdeath=1-MaleDeathProb[stopage];
     Wstopdeath=1-FemaleDeathProb[stopage];
@@ -623,17 +623,17 @@ function CreatePopPyramid(stopage){
 
     Total_Mpop=0;
     Total_Wpop=0;
-    
+
     count=0;
     age=0;
     while ((age<120 || WPop>0.002) && age<50000){
-        
+
         Mendataset.push(MPop);
         Womendataset.push(-WPop);
-        
+
         Total_Mpop+=MPop;
         Total_Wpop+=WPop;
-        
+
         if (age>stopage){
             MPop*=Mstopdeath;
             WPop*=Wstopdeath;
@@ -645,8 +645,8 @@ function CreatePopPyramid(stopage){
         age++;
     }
     length = Mendataset.length
-    
-    
+
+
     if (length>20000){
         bins=1000;
     }
@@ -673,7 +673,7 @@ function CreatePopPyramid(stopage){
     }
     Mtempcount=0;
     Wtempcount=0;
-    
+
     for(var i = 0; i < length+1; i++){
         Mtempcount+= Mendataset[i];
         Wtempcount+= Womendataset[i];
@@ -685,7 +685,7 @@ function CreatePopPyramid(stopage){
             Wtempcount=0;
         }
     }
-    
+
     data.datasets[0].data = FinalMendataset;
     data.datasets[1].data = FinalWomendataset;
     data.labels = chart_labels;
@@ -714,8 +714,8 @@ function CheckDead(age){
         appear="😃"
         document.getElementById("DeadOrAlive").innerHTML = appear;
         return false;
-    }    
-    
+    }
+
 }
 
 function ManyCheckDead(age){
@@ -733,12 +733,12 @@ function ManyCheckDead(age){
             else{
                 ManyAppear +="😃";
                 //document.getElementById("ManyDeadOrAlive").innerHTML = appear;
-            }    
+            }
         }
         else{
             ManyAppear +="💀";
         }
-        
+
 
     }
     document.getElementById("ManyDeadOrAlive").innerHTML = ManyAppear;
@@ -754,33 +754,33 @@ function checknumberalive(age){
 
 // This is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
 var ViewModel = function() {
-    
+
     this.rangeValue = ko.observable(25);
     this.ageValue = ko.observable(30);
     this.Gender = ko.observable("Boy");
     this.isdead = ko.observable(false);
-    
+
     this.numberOfClicks = ko.observable(this.rangeValue());
-    
+
     this.registerClick = function() {
         this.isdead(CheckDead(parseInt(this.numberOfClicks())));
         this.numberOfClicks(1 + parseInt(this.numberOfClicks()));
     },this;
-    
+
     this.resetClicks = function() {
         appear="😃"
         document.getElementById("DeadOrAlive").innerHTML = appear;
         this.isdead(false);
         this.numberOfClicks(parseInt(this.rangeValue()));
     },this;
-    
-    
+
+
     this.Manyisdead = ko.observable(false);
     this.ManynumberOfClicks = ko.observable(this.rangeValue());
     this.numberAlive = ko.observable(100);
     this.numberDead = ko.observable(0);
     this.Manyisdead = ko.observable(false);
-    
+
     this.ManyregisterClick = function() {
         ManyCheckDead(parseInt(this.ManynumberOfClicks()));
         //this.Manyisdead(CheckDead(parseInt(this.numberOfClicks())));
@@ -788,9 +788,9 @@ var ViewModel = function() {
         this.numberAlive(checknumberalive(parseInt(this.ManynumberOfClicks)));
         this.numberDead(100-this.numberAlive());
         this.Manyisdead(this.numberAlive()==0);
-        
+
     },this;
-    
+
     this.ManyresetClicks = function() {
         //appear="😃"
         //document.getElementById("DeadOrAlive").innerHTML = appear;
@@ -804,34 +804,34 @@ var ViewModel = function() {
             ManyAppear +="😃";
         }
         document.getElementById("ManyDeadOrAlive").innerHTML = ManyAppear;
-        
+
         this.Manyisdead(false);
         this.ManynumberOfClicks(parseInt(this.rangeValue()));
         this.numberAlive(100);
         this.numberDead(0);
     },this;
-    
+
 //    this.numberAlive = ko.pureComputed(function() {
 //        return checknumberalive(parseInt(this.ManynumberOfClicks));
 //    }, this);
-    
+
     data0(parseInt(this.rangeValue(),10));
     DieProp(parseInt(this.ageValue(),10));
     LifeExpCalc(parseInt(this.ageValue(),10));
     aliveProb(parseInt(this.ageValue()),parseInt(this.rangeValue(),10));
     CreatePopPyramid(parseInt(this.ageValue(),10))
-    
+
     this.replot = function(){
         data0(parseInt(this.rangeValue()));
     };
-    
+
     this.rangeValue.subscribe(function(newValue) {
         data0(parseInt(newValue,10));
         appear="😃"
         document.getElementById("DeadOrAlive").innerHTML = appear;
         this.isdead(false);
         this.numberOfClicks(parseInt(this.rangeValue()));
-        
+
         var ManyAppear = '';
         for (let i=0; i<100; i++){
             if (i%20==0 && i!=0){
@@ -841,22 +841,22 @@ var ViewModel = function() {
             ManyAppear +="😃";
         }
         document.getElementById("ManyDeadOrAlive").innerHTML = ManyAppear;
-        
+
         this.Manyisdead(false);
         this.numberAlive(100);
         this.numberDead(0);
         this.ManynumberOfClicks(parseInt(this.rangeValue()));
-        
+
     },this);
-    
+
     this.ageValue.subscribe(function(newValue) {
         DieProp(parseInt(newValue,10));
         LifeExpCalc(parseInt(newValue,10));
         CalculatePop(parseInt(newValue,10));
         CreatePopPyramid(parseInt(newValue,10));
-        
+
     });
-    
+
     this.Gender.subscribe(function(newValue) {
         if (newValue=="Boy"){
             DeathProb = MaleDeathProb;
@@ -866,27 +866,27 @@ var ViewModel = function() {
             DeathProb = FemaleDeathProb;
         }
         curr_LifeExp=[]
-        for (let i = 0; i < 122; i ++) { 
+        for (let i = 0; i < 122; i ++) {
             curr_LifeExp.push(computeLifeExp(121,DeathProb[i],i));
         };
         this.rangeValue.valueHasMutated();
         this.ageValue.valueHasMutated();
     },this);
-    
+
     ko.computed(function() {
         //var params = { stopage: this.ageValue(), age: this.rangeValue() };
         aliveProb(parseInt(this.rangeValue(),10),parseInt(this.ageValue(),10));
         },
         this);
-        
+
     this.DyingProb = ko.pureComputed(function() {
         return (DeathProb[this.ageValue()]*100).toFixed(3);
     },this);
-        
+
     this.GainedYears = ko.pureComputed(function() {
         return YearsGained(parseInt(this.rangeValue()),this.ageValue()).toFixed(2);
     },this);
-    
+
 }
 
 // Activates knockout.js
